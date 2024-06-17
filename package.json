@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node --watch ./express-crud/index.js"
+    "dev": "node --watch ./express-typeorm/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +13,7 @@
     "body-parser": "^1.20.2",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "pg": "^8.12.0",
     "ts": "^0.2.2",
     "typeorm": "^0.3.20",
     "typescript": "^5.4.5",
