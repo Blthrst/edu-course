@@ -4,7 +4,7 @@ async function getUser(req, res) {
     console.log(req.params)
     const {userId} = req.params
 
-    const user = await model.getUserByIdAsync(userId)
+    const user = await model.getUserById(userId)
 
     if (user) res.json(user)
     

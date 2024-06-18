@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node --watch ./express-typeorm/index.js"
+    "dev": "node --watch ./express-typeorm/index.js",
+    "typeorm": "npx typeorm",
+    "m:create": "typeorm migration:create -o ./express-typeorm/migrations/",
+    "m:run": "typeorm migration:run --dataSource ./express-typeorm/model/datasource.js"
   },
   "author": "",
   "license": "ISC",

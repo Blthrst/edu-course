@@ -10,7 +10,8 @@ const AppDataSource = new DataSource({
   username: process.env.PG_USER,
   password: process.env.PG_PWD,
   database: process.env.PG_NAME,
-  entities: [UserEntity]
+  entities: [UserEntity],
+  migrations: ["../migrations/*.js"]
 });
 
 AppDataSource.initialize()
