@@ -1,0 +1,23 @@
+meta {
+  name: projects-new
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3000/projects/new
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyQG1haWwuY29tIiwiaWQiOiI0MGEzNzliNC0xMmVjLTRiZTYtYmUxMy0yNTUxYzk3ZTJkZDQiLCJpYXQiOjE3MTkxMjQ1MTksImV4cCI6MTcxOTEyODExOX0.oUBPRojHpks3nouzlDdhaTYeyQLLZyyxyr6AIdg8Dvo
+}
+
+body:json {
+  {
+    "title": "New Project",
+    "created_at": "2018-07-17",
+    "user_id": "40a379b4-12ec-4be6-be13-2551c97e2dd4"
+  }
+}

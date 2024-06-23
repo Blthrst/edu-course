@@ -1,0 +1,20 @@
+meta {
+  name: projects-put
+  type: http
+  seq: 7
+}
+
+put {
+  url: http://localhost:3000/projects/update
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+     "id": 2143067,
+    "title": "Updated Project",
+    "created_at": "2018-07-16T17:00:00.000Z",
+    "user_id": "40a379b4-12ec-4be6-be13-2551c97e2dd4"
+  }
+}

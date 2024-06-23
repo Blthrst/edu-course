@@ -6,7 +6,7 @@ export class Projects1719029018763 implements MigrationInterface {
         create table if not exists projects (
             id integer primary key not null,
             title varchar(255) not null,
-            created_at timestamp not null,
+            created_at date not null,
             user_id varchar(255) not null
         );
         `);

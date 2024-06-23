@@ -1,16 +1,17 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { randomInt } from 'crypto';
+import { Entity, PrimaryColumn, Column } from 'typeorm';
 
-@Entity({ name: 'users' })
+@Entity({ name: 'projects' })
 export class ProjectEntity {
-  @PrimaryGeneratedColumn('increment')
-  id: number;
+  @PrimaryColumn()
+  id: number = randomInt(9999999);
 
   @Column()
   title: string;
 
-  @Column()
-  createdAt: string;
+  @Column({name: "created_at"})
+  created_at: string;
 
-  @Column()
-  userId: string
+  @Column({name: "user_id"})
+  user_id: string
 }

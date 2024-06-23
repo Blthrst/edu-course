@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-@Entity({ name: 'users' })
+@Entity({ name: 'tasks' })
 export class TaskEntity {
   @PrimaryGeneratedColumn('increment')
   id: number;
@@ -14,12 +14,12 @@ export class TaskEntity {
   @Column()
   title: string
 
-  @Column()
-  createdAt: string
+  @Column({name: "created_at"})
+  created_at: string
 
-  @Column()
-  projectId: number
+  @Column({name: "project_id"})
+  project_id: number
 
-  @Column()
-  columnId: number
+  @Column({name: "column_id"})
+  column_id: number
 }

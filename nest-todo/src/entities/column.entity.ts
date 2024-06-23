@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-@Entity({ name: 'users' })
+@Entity({ name: 'columns' })
 export class ColumntEntity {
   @PrimaryGeneratedColumn('increment')
   id: number;
@@ -11,6 +11,6 @@ export class ColumntEntity {
   @Column()
   title: string;
 
-  @Column()
-  projectId: number;
+  @Column({name: "project_id"})
+  project_id: number;
 }
