@@ -15,31 +15,42 @@ export class SignUpDto extends SignInDto {
 }
 
 export class UserObjectDto {
-    id: string
-    token: string
+  id: string;
+  token: string;
 }
 
-export class ProjectCreationDto {
-  @IsString()
-  title: string;
+export namespace ProjectDtos {
+  export class ProjectCreationDto {
+    @IsString()
+    title: string;
 
-  @IsNumber()
-  created_at: string;
+    @IsNumber()
+    created_at: string;
 
-  @IsString()
-  user_id: string;
+    @IsString()
+    user_id: string;
+  }
+
+  export class ProjectEditionDto extends ProjectCreationDto {
+    @IsString()
+    id: number;
+  }
 }
 
-export class ProjectEditionDto {
-  @IsString()
-  id: number;
+export namespace ColumnDtos {
+  export class ColumnCreationDto {
+    @IsNumber()
+    number: number;
 
-  @IsString()
-  title: string;
+    @IsString()
+    title: string;
 
-  @IsNumber()
-  created_at: string;
+    @IsNumber()
+    project_id: number;
+  }
 
-  @IsString()
-  user_id: string;
+  export class ColumnEditionDto extends ColumnCreationDto {
+    @IsNumber()
+    id: number;
+  }
 }

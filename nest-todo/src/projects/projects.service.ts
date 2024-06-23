@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ProjectCreationDto, ProjectEditionDto } from 'src/dtos';
+import { ProjectDtos } from 'src/dtos';
 
 import { ProjectEntity } from 'src/entities/project.entity';
 import { Repository } from 'typeorm';
@@ -27,7 +27,7 @@ export class ProjectsService {
     return proj
   }
 
-  public async create(body: ProjectCreationDto): Promise<ProjectEntity> {
+  public async create(body: ProjectDtos.ProjectCreationDto): Promise<ProjectEntity> {
     const proj = this.projectsRepository.create(body)
     await this.projectsRepository
     .createQueryBuilder()
@@ -39,7 +39,7 @@ export class ProjectsService {
     return proj
   }
 
-  public async update(body: ProjectEditionDto): Promise<ProjectEntity> {
+  public async update(body: ProjectDtos.ProjectEditionDto): Promise<ProjectEntity> {
     await this.projectsRepository
     .createQueryBuilder()
     .update()

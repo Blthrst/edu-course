@@ -4,7 +4,7 @@ import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { UserObject } from 'src/auth/user-info';
 import { ProjectsService } from './projects.service';
-import { ProjectCreationDto, ProjectEditionDto, UserObjectDto } from 'src/dtos';
+import { ProjectDtos, UserObjectDto } from 'src/dtos';
 
 @Controller('projects')
 export class ProjectsController {
@@ -27,7 +27,7 @@ export class ProjectsController {
 
   @UseGuards(AuthGuard)
   @Post('/new')
-  public async create(@Body() body: ProjectCreationDto) {
+  public async create(@Body() body: ProjectDtos.ProjectCreationDto) {
     return await this.projectsService.create(body);
   }
 
@@ -42,7 +42,7 @@ export class ProjectsController {
 
   @UseGuards(AuthGuard)
   @Put('/update')
-  public async update(@Body() body: ProjectEditionDto) {
+  public async update(@Body() body: ProjectDtos.ProjectEditionDto) {
     return await this.projectsService.update(body)
   }
 }

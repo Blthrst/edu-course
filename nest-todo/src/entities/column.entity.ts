@@ -1,9 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { randomInt } from 'crypto';
+import { Entity, PrimaryColumn, Column } from 'typeorm';
 
 @Entity({ name: 'columns' })
-export class ColumntEntity {
-  @PrimaryGeneratedColumn('increment')
-  id: number;
+export class ColumnEntity {
+  @PrimaryColumn()
+  id: number = randomInt(999999);
 
   @Column()
   number: number;
@@ -11,6 +12,6 @@ export class ColumntEntity {
   @Column()
   title: string;
 
-  @Column({name: "project_id"})
+  @Column({ name: 'project_id' })
   project_id: number;
 }
