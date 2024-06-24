@@ -7,6 +7,6 @@ import { ColumnsService } from './columns.service';
 @Module({
     imports: [TypeOrmModule.forFeature([ColumnEntity])],
     providers: [ColumnsService],
-    exports: [ColumnsService]
+    exports: [ColumnsService],
 })
 export class ColumnsModule {}

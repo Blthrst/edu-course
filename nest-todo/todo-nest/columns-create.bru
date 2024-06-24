@@ -1,0 +1,19 @@
+meta {
+  name: columns-create
+  type: http
+  seq: 9
+}
+
+post {
+  url: http://localhost:3000/projects/2143067/columns/new
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "title": "to do",
+    "number": 1,
+    "project_id": 2143067
+  }
+}

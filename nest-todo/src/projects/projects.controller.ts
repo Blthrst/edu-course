@@ -1,14 +1,26 @@
-import { Controller, Post, Get, Put, Delete, Param, Body } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Get,
+  Put,
+  Delete,
+  Param,
+  Body,
+} from '@nestjs/common';
 import { UseGuards } from '@nestjs/common';
 
 import { AuthGuard } from 'src/auth/auth.guard';
 import { UserObject } from 'src/auth/user-info';
 import { ProjectsService } from './projects.service';
-import { ProjectDtos, UserObjectDto } from 'src/dtos';
+import { ColumnDtos, ProjectDtos, UserObjectDto } from 'src/dtos';
+import { ColumnsService } from 'src/columns/columns.service';
 
 @Controller('projects')
 export class ProjectsController {
-  constructor(private projectsService: ProjectsService) {}
+  constructor(
+    private projectsService: ProjectsService,
+    private columnsService: ColumnsService,
+  ) {}
 
   @UseGuards(AuthGuard)
   @Get('/all')
@@ -43,6 +55,30 @@ export class ProjectsController {
   @UseGuards(AuthGuard)
   @Put('/update')
   public async update(@Body() body: ProjectDtos.ProjectEditionDto) {
-    return await this.projectsService.update(body)
+    return await this.projectsService.update(body);
+  }
+
+  @UseGuards(AuthGuard)
+  @Get('/:id/columns')
+  public async getColumns(@Param('id') id: number) {
+    return await this.columnsService.findAll(id);
+  }
+
+  @UseGuards(AuthGuard)
+  @Post('/:id/columns/new')
+  public async createColumn(@Body() body: ColumnDtos.ColumnCreationDto) {
+    return await this.columnsService.create(body)
+  }
+
+  @UseGuards(AuthGuard)
+  @Put('/:id/columns/update')
+  public async updateColumn(@Body() body: ColumnDtos.ColumnEditionDto) {
+    return await this.columnsService.update(body)
+  }
+
+  @UseGuards(AuthGuard)
+  @Delete('/:id/columns/:columnId')
+  public async deleteColumn(@Param("columnId") id: number) {
+    return await this.columnsService.delete(id)
   }
 }

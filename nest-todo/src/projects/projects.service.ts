@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ColumnsService } from 'src/columns/columns.service';
 import { ProjectDtos } from 'src/dtos';
 
 import { ProjectEntity } from 'src/entities/project.entity';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 
 @Injectable()
 export class ProjectsService {
@@ -13,52 +14,56 @@ export class ProjectsService {
   ) {}
 
   public async findAll(user_id: string): Promise<ProjectEntity[]> {
-    const projs = await this.projectsRepository.findBy({user_id})
+    const projs = await this.projectsRepository.findBy({ user_id });
 
-    return projs
+    return projs;
   }
 
   public async findById(user_id: string, id: number): Promise<ProjectEntity> {
     const proj = await this.projectsRepository.findOneBy({
-        user_id,
-        id
-    })
+      user_id,
+      id,
+    });
 
-    return proj
+    return proj;
   }
 
-  public async create(body: ProjectDtos.ProjectCreationDto): Promise<ProjectEntity> {
-    const proj = this.projectsRepository.create(body)
+  public async create(
+    body: ProjectDtos.ProjectCreationDto,
+  ): Promise<ProjectEntity> {
+    const proj = this.projectsRepository.create(body);
     await this.projectsRepository
-    .createQueryBuilder()
-    .insert()
-    .into("projects")
-    .values(proj)
-    .execute()
+      .createQueryBuilder()
+      .insert()
+      .into('projects')
+      .values(proj)
+      .execute();
 
-    return proj
+    return proj;
   }
 
-  public async update(body: ProjectDtos.ProjectEditionDto): Promise<ProjectEntity> {
+  public async update(
+    body: ProjectDtos.ProjectEditionDto,
+  ): Promise<ProjectEntity> {
     await this.projectsRepository
-    .createQueryBuilder()
-    .update()
-    .set(body)
-    .where({id: body.id, user_id: body.user_id})
-    .execute()
+      .createQueryBuilder()
+      .update()
+      .set(body)
+      .where({ id: body.id, user_id: body.user_id })
+      .execute();
 
-    const proj = await this.findById(body.user_id, body.id)
+    const proj = await this.findById(body.user_id, body.id);
 
-    return proj
+    return proj;
   }
 
-  public async delete(user_id: string, id: number) {
+  public async delete(user_id: string, id: number): Promise<DeleteResult> {
     const result = await this.projectsRepository
-    .createQueryBuilder()
-    .delete()
-    .where({id, user_id})
-    .execute()
+      .createQueryBuilder()
+      .delete()
+      .where({ id, user_id })
+      .execute();
 
-    return result
+    return result;
   }
 }
