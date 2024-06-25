@@ -15,12 +15,19 @@ export class ProjectsService {
   ) {}
 
   public async getEntire(user_id: string, id: number): Promise<any> {
-    const proj = await this.projectsRepository.manager.query(`
-      select * from projects join (
-        select * from columns join tasks on columns.project_id = tasks.project_id
-      ) as col_tasks on projects.id = col_tasks.project_id
-      where (projects.id = ? AND projects.user_id = ?)
-    `, [id, user_id])
+    const proj = await this.projectsRepository.find({
+      relations: {
+        columns: {
+          tasks: true
+        }
+      }, 
+      where: {
+        user_id,
+        id
+      }
+    })
+
+    console.log(proj)
 
     return proj
   }
