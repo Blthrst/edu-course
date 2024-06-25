@@ -54,3 +54,30 @@ export namespace ColumnDtos {
     id: number;
   }
 }
+
+export namespace TaskDtos {
+  export class TaskCreationDto {
+    @IsString()
+    number: number;
+
+    @IsString()
+    description: string;
+
+    @IsString()
+    title: string;
+
+    @IsString()
+    created_at: string;
+
+    @IsString()
+    project_id: number;
+
+    @IsString()
+    column_id: number;
+  }
+
+  export class TaskEditionDto extends TaskCreationDto {
+    @IsNumber()
+    id: number
+  }
+}

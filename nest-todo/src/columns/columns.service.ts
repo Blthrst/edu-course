@@ -20,7 +20,7 @@ export class ColumnsService {
     await this.columnsRepository
       .createQueryBuilder()
       .insert()
-      .into('columns')
+      .into(ColumnEntity)
       .values(column)
       .execute();
 

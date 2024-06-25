@@ -1,9 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, Column, ManyToOne, JoinColumn, PrimaryColumn } from 'typeorm';
+import { randomInt } from 'crypto';
+
+import { ColumnEntity } from './column.entity';
 
 @Entity({ name: 'tasks' })
 export class TaskEntity {
-  @PrimaryGeneratedColumn('increment')
-  id: number;
+  @PrimaryColumn()
+  id: number = randomInt(999999);
 
   @Column()
   number: number;
@@ -22,4 +25,8 @@ export class TaskEntity {
 
   @Column({name: "column_id"})
   column_id: number
+
+  @ManyToOne(() => ColumnEntity, column => column.id)
+  @JoinColumn({ name: "column_id" })
+  column: ColumnEntity
 }

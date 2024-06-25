@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ColumnsService } from 'src/columns/columns.service';
 import { ProjectDtos } from 'src/dtos';
+import { ColumnEntity } from 'src/entities/column.entity';
 
 import { ProjectEntity } from 'src/entities/project.entity';
 import { DeleteResult, Repository } from 'typeorm';
@@ -13,6 +14,17 @@ export class ProjectsService {
     private projectsRepository: Repository<ProjectEntity>,
   ) {}
 
+  public async getEntire(user_id: string, id: number): Promise<any> {
+    const proj = await this.projectsRepository.manager.query(`
+      select * from projects join (
+        select * from columns join tasks on columns.project_id = tasks.project_id
+      ) as col_tasks on projects.id = col_tasks.project_id
+      where (projects.id = ? AND projects.user_id = ?)
+    `, [id, user_id])
+
+    return proj
+  }
+
   public async findAll(user_id: string): Promise<ProjectEntity[]> {
     const projs = await this.projectsRepository.findBy({ user_id });
 
@@ -20,7 +32,7 @@ export class ProjectsService {
   }
 
   public async findById(user_id: string, id: number): Promise<ProjectEntity> {
-    const proj = await this.projectsRepository.findOneBy({
+    const proj = await this.projectsRepository.findOneBy({  
       user_id,
       id,
     });
@@ -35,7 +47,7 @@ export class ProjectsService {
     await this.projectsRepository
       .createQueryBuilder()
       .insert()
-      .into('projects')
+      .into(ProjectEntity)
       .values(proj)
       .execute();
 
