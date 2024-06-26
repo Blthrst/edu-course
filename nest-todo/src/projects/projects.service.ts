@@ -27,8 +27,6 @@ export class ProjectsService {
       }
     })
 
-    console.log(proj)
-
     return proj
   }
 
